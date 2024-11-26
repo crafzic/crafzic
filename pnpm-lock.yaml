@@ -8,6 +8,18 @@ importers:
 
   .: {}
 
+  apps/test-1:
+    dependencies:
+      canvas:
+        specifier: ^2.11.2
+        version: 2.11.2
+      ffmpeg-static:
+        specifier: ^5.2.0
+        version: 5.2.0
+      fluent-ffmpeg:
+        specifier: ^2.1.3
+        version: 2.1.3
+
   packages/core:
     dependencies:
       canvas:
