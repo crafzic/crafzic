@@ -1,0 +1,44 @@
+{
+  "name": "@crafzic/crafzic-image",
+  "version": "0.0.0-beta.1",
+  "description": "dynamically generate image using node-canvas",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup --minify terser",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "canvas",
+    "image"
+  ],
+  "author": "Pasindu P Konghawaththa",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "terser": "^5.36.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crafzic/crafzic.git"
+  },
+  "bugs": {
+    "url": "https://github.com/crafzic/crafzic/issues"
+  },
+  "homepage": "https://github.com/crafzic/crafzic#readme",
+  "peerDependencies": {
+    "canvas": "2.11.2"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2"
+  }
+}
