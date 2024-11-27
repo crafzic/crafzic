@@ -3,7 +3,7 @@ import { POSITION, Renderer, Text } from "@crafzic/crafzic-image";
 async function hello() {
   const renderer = new Renderer({
     outputFilepath: "./out",
-    color: "rgba(0,0,0,0.7)",
+    color: "rgba(0,0,0,0.4)",
     height: 1080,
     width: 1920,
   });

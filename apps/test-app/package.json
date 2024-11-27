@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "npx nodemon",
     "build": "rimraf ./dist && tsc",
-    "start": "npm run build && node dist/index.js"
+    "start": "npm run build && node dist/index.js && npm run open:image",
+    "open:image": "xdg-open ./out/image.png"
   },
   "keywords": [],
   "author": "",
