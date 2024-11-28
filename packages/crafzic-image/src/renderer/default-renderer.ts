@@ -33,9 +33,9 @@ export class DefaultRenderer {
 
       this._ctx.font = `${props.fontSize}px Arial`
       this._ctx.fillStyle = props.color
-      this._ctx.fillText(props.text, props.x, props.y)
       this._ctx.textAlign = props.textAlign
       this._ctx.textBaseline = props.textBaseline
+      this._ctx.fillText(props.text, props.x, props.y)
     }
   }
   async render(): Promise<void> {

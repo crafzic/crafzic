@@ -86,11 +86,40 @@ export class Text {
         width: this._canvasWidth,
         height: this._canvasHeight,
       })
+      this.selectTextPosition(position.position)
       this._position = {
         x,
         y,
       }
     }
+    return this
+  }
+  private selectTextPosition(pos: POSITION): this {
+    switch (pos) {
+      case POSITION.TOP_LEFT:
+        this._text_baseline = 'top'
+        this._text_align = 'left'
+        break
+      case POSITION.TOP_RIGHT:
+        this._text_baseline = 'top'
+        this._text_align = 'right'
+        break
+      case POSITION.BOTTOM_LEFT:
+        this._text_baseline = 'bottom'
+        this._text_align = 'left'
+        break
+      case POSITION.BOTTOM_RIGHT:
+        this._text_baseline = 'bottom'
+        this._text_align = 'right'
+        break
+      case POSITION.CENTER:
+        this._text_baseline = 'middle'
+        this._text_align = 'center'
+        break
+      default:
+        break
+    }
+
     return this
   }
 
