@@ -1,7 +1,7 @@
 {
   "name": "@crafzic/crafzic-image",
   "private": false,
-  "version": "0.0.0-beta.1",
+  "version": "0.0.0-beta-1",
   "description": "dynamically generate image using node-canvas",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
