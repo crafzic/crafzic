@@ -1,0 +1,9 @@
+{
+  "mode": "pre",
+  "tag": "0.0.0-beta.2",
+  "initialVersions": {
+    "test-app": "1.0.0",
+    "@crafzic/crafzic-image": "0.0.0-beta.1"
+  },
+  "changesets": []
+}
