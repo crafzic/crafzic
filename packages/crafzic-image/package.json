@@ -47,5 +47,8 @@
   "bugs": {
     "url": "https://github.com/crafzic/crafzic/issues"
   },
-  "homepage": "https://github.com/crafzic/crafzic#readme"
+  "homepage": "https://github.com/crafzic/crafzic#readme",
+  "dependencies": {
+    "skia-canvas": "^1.0.2"
+  }
 }

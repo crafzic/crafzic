@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "npx nodemon",
     "build": "rimraf ./dist && tsc",
-    "start": "npm run build && node dist/index.js && npm run open:image",
+    "start": "npm run build && node dist/index.js ",
     "open:image": "xdg-open ./out/image.png"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@crafzic/crafzic-image": "workspace:*"
+    "@crafzic/crafzic-image": "workspace:*",
+    "skia-canvas": "^1.0.2"
   }
 }

@@ -1,7 +1,5 @@
-const favoriteFruits = ['apple', 'strawberry', 'orange']
-
-function addFruit(fruit: string) {
-  favoriteFruits.push(fruit)
-}
-
-export default addFruit
+export * from './config'
+export * from './lib/text'
+export * from './renderer/default-renderer'
+export * from './@types/position'
+export * from './@types/text-align'
