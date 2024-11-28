@@ -1,6 +1,6 @@
 {
   "name": "@crafzic/crafzic-image",
-  "private":false,
+  "private": false,
   "version": "0.0.0-beta.1",
   "description": "dynamically generate image using node-canvas",
   "main": "dist/index.js",
@@ -17,7 +17,8 @@
   },
   "keywords": [
     "canvas",
-    "image"
+    "image",
+    "image-generation"
   ],
   "author": "Pasindu P Konghawaththa",
   "license": "MIT",
@@ -35,11 +36,5 @@
   "bugs": {
     "url": "https://github.com/crafzic/crafzic/issues"
   },
-  "homepage": "https://github.com/crafzic/crafzic#readme",
-  "peerDependencies": {
-    "canvas": "2.11.2"
-  },
-  "dependencies": {
-    "canvas": "^2.11.2"
-  }
+  "homepage": "https://github.com/crafzic/crafzic#readme"
 }
