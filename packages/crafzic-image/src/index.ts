@@ -1,3 +1,7 @@
-const add = (a: number, b: number) => a + b;
+const favoriteFruits = ['apple', 'strawberry', 'orange']
 
-export { add };
+function addFruit(fruit: string) {
+  favoriteFruits.push(fruit)
+}
+
+export default addFruit
