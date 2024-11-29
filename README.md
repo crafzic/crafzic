@@ -22,8 +22,7 @@ const text = new Text(config)
   .setColor("#ff0000");
 renderer.addText(text);
 ```
-
-![image 1](images/rainbox.png | width=200)
+<img width="720" alt="rainbox" src="https://github.com/user-attachments/assets/7b3d1a6e-3743-4901-b29d-f45080f658ba">
 
 ```ts
 import {
@@ -85,4 +84,4 @@ async function main() {
 main();
 ```
 
-![image 1](images/image.png | width=200)
+![image](https://github.com/user-attachments/assets/585625f8-b092-45b1-8bac-2eaee473ba6b)
