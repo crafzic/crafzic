@@ -1,155 +1,144 @@
-import { configManager } from "../config/library-config";
+import { ElementPositionType } from 'src/@types/position'
+import { Config } from '../config'
+import { POSITION } from 'src/constants/constant'
+import findPosition from 'src/util/find-position'
+import { RendererTextAlign, RendererTextBaseline } from 'src/@types/text-align'
 
-import { ElementInterface } from "./interfaces/element-interface";
-import { CanvasTextAlign, CanvasTextBaseline } from "canvas";
-import { POSITION } from "src/constant/constant";
-import { RendererColorGradient, RendererColorPattern } from "src/types";
-import getPosition from "src/util/get-position";
-
-type TextPositionType = {
-  textBaseline: CanvasTextBaseline;
-  textAlign: CanvasTextAlign;
-};
-
-export class Text implements ElementInterface {
-  private text: string;
-  private position?: POSITION = undefined;
-  private x: number = 0;
-  private y: number = 0;
-  private color: string | RendererColorGradient | RendererColorPattern =
-    "#000000";
-  private fontSize: number = 20;
-  private fontWeight: number = 400;
-  private imageWidth: number = 0;
-  private imageHeight: number = 0;
-  constructor(text: string = "") {
-    this.imageWidth = configManager.getConfig("imageWidth");
-    this.imageHeight = configManager.getConfig("imageHeight");
-    this.text = text;
+export class Text {
+  private _config: Config
+  private _text: string
+  private _canvasWidth: number
+  private _canvasHeight: number
+  private _fontSize: number
+  private _color: string
+  private _text_baseline: RendererTextBaseline
+  private _text_align: RendererTextAlign
+  private _position: {
+    x: number
+    y: number
   }
-  getPosition(): { x: number; y: number } {
-    console.log("x", this.x, "y", this.y);
 
+  constructor(config: Config) {
+    this._config = config
+    this._canvasWidth = this._config.width
+    this._canvasHeight = this._config.height
+    this._text = ''
+    this._fontSize = 20
+    this._color = '#000000'
+
+    const { x, y } = findPosition({
+      position: POSITION.CENTER,
+      width: this._canvasWidth,
+      height: this._canvasHeight,
+    })
+    this._position = {
+      x,
+      y,
+    }
+    this._text_align = 'center'
+    this._text_baseline = 'middle'
+  }
+  get text(): string {
+    return this._text
+  }
+
+  setTextPosition({
+    textAlign = 'center',
+    textBaseline = 'middle',
+  }: {
+    textAlign?: CanvasTextAlign
+    textBaseline?: CanvasTextBaseline
+  }): this {
+    this._text_align = textAlign
+    this._text_baseline = textBaseline
+    return this
+  }
+  setColor(color: string): this {
+    this._color = color
+    return this
+  }
+
+  _properties() {
     return {
-      x: this.x,
-      y: this.y,
-    };
-  }
-  below(instance: ElementInterface, height: number): this {
-    this.y = this.y + instance.getPosition().y + height;
-    this.x = this.x + instance.getPosition().x;
-
-    return this;
-  }
-
-  setFontWeight(fontWeight: number): this {
-    this.fontWeight = fontWeight;
-    return this;
-  }
-  setPosition(position: POSITION): this {
-    this.position = position;
-    const { x, y } = getPosition({
-      position,
-      width: this.imageWidth,
-      height: this.imageHeight,
-    });
-    this.x = x;
-    this.y = y;
-
-    return this;
+      x: this._position.x,
+      y: this._position.y,
+      text: this._text,
+      fontSize: this._fontSize,
+      color: this._color,
+      textBaseline: this._text_baseline,
+      textAlign: this._text_align,
+    }
   }
 
-  setCustomPosition({ x, y }: { x: number; y: number }): this {
-    this.x = x;
-    this.y = y;
-    return this;
+  setText(text: string): this {
+    this._text = text
+    return this
+  }
+  setPosition(position: ElementPositionType): this {
+    if (position.position == undefined) {
+      this._position = {
+        x: position.x,
+        y: position.y,
+      }
+    } else {
+      const { x, y } = findPosition({
+        position: position.position,
+        width: this._canvasWidth,
+        height: this._canvasHeight,
+      })
+      this.selectTextPosition(position.position)
+      this._position = {
+        x,
+        y,
+      }
+    }
+    return this
+  }
+  private selectTextPosition(pos: POSITION): this {
+    switch (pos) {
+      case POSITION.TOP_LEFT:
+        this._text_baseline = 'top'
+        this._text_align = 'left'
+        break
+      case POSITION.TOP_RIGHT:
+        this._text_baseline = 'top'
+        this._text_align = 'right'
+        break
+      case POSITION.BOTTOM_LEFT:
+        this._text_baseline = 'bottom'
+        this._text_align = 'left'
+        break
+      case POSITION.BOTTOM_RIGHT:
+        this._text_baseline = 'bottom'
+        this._text_align = 'right'
+        break
+      case POSITION.CENTER:
+        this._text_baseline = 'middle'
+        this._text_align = 'center'
+        break
+      default:
+        break
+    }
+
+    return this
+  }
+
+  get position(): {
+    x: number
+    y: number
+  } {
+    return this._position
+  }
+  get fontSize(): number {
+    return this._fontSize
   }
   setFontSize(fontSize: number): this {
-    this.fontSize = fontSize;
-    return this;
+    this._fontSize = fontSize
+    return this
   }
-  setColor(color: string | RendererColorGradient | RendererColorPattern): this {
-    this.color = color;
-    return this;
-  }
-  setText(text: string) {
-    this.text = text;
-  }
-  _getProperties({ width, height }: { width: number; height: number }) {
-    const axis = this.getAxis({
-      width: width,
-      height: height,
-    });
-
-    return {
-      x: axis.x,
-      y: axis.y,
-      text: this.text,
-      color: this.color,
-      fontSize: this.fontSize,
-      textBaseline: this.getTextPosition().textBaseline,
-      textAlign: this.getTextPosition().textAlign,
-      fontWeight: this.fontWeight,
-    };
-  }
-
-  private getAxis({ width, height }: { width: number; height: number }): {
-    x: number;
-    y: number;
-  } {
-    console.log("this.position", this.position);
-
-    if (this.position == undefined) {
-      return {
-        x: this.x,
-        y: this.y,
-      };
-    } else {
-      return getPosition({ position: this.position, width, height });
-    }
-  }
-
-  private getTextPosition(): TextPositionType {
-    if (this.position == undefined) {
-      return {
-        textBaseline: "top",
-        textAlign: "center",
-      };
-    } else {
-      if (this.position === POSITION.TOP_LEFT) {
-        return {
-          textBaseline: "top",
-          textAlign: "left",
-        };
-      }
-      if (this.position === POSITION.TOP_RIGHT) {
-        return {
-          textBaseline: "top",
-          textAlign: "right",
-        };
-      }
-      if (this.position === POSITION.BOTTOM_LEFT) {
-        return {
-          textBaseline: "bottom",
-          textAlign: "left",
-        };
-      }
-      if (this.position === POSITION.BOTTOM_RIGHT) {
-        return {
-          textBaseline: "bottom",
-          textAlign: "right",
-        };
-      }
-      if (this.position === POSITION.CENTER) {
-        return {
-          textBaseline: "middle",
-          textAlign: "center",
-        };
-      }
-    }
-    return {
-      textBaseline: "top",
-      textAlign: "center",
-    };
+  below(textInstance: Text, spacing: number): this {
+    this._position.x = textInstance.position.x
+    this._position.y = textInstance.position.y + textInstance.fontSize + spacing
+    return this
   }
 }
