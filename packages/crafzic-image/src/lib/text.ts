@@ -138,8 +138,7 @@ export class Text {
   }
   below(textInstance: Text, spacing: number): this {
     this._position.x = textInstance.position.x
-    this._position.y +=
-      textInstance.position.y + textInstance.fontSize + spacing
+    this._position.y = textInstance.position.y + textInstance.fontSize + spacing
     return this
   }
 }
